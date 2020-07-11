@@ -4,12 +4,12 @@
 
 function dnaIsWholeNumberAfterSqrt(dna) {
     let dnaLength = Math.sqrt(dna.length);
-    return (dnaLength - Math.floor(dnaLength) == 0);
+    return (dnaLength - Math.floor(dnaLength) === 0);
 }
 
 function dnaBases(dna) {
     let regExp = /[ACGT]/g;
-    return (dna.match(regExp).length == dna.length);
+    return (dna.match(regExp).length === dna.length);
 }
 
 // ============================
@@ -22,7 +22,7 @@ function dnaConverter(dna) {
     let dnaFragment = "";
     for (let i = 0; i < dna.length; i++) {
         dnaFragment = dnaFragment + dna[i];
-        if (dnaFragment.length == fragmentLength) {
+        if (dnaFragment.length === fragmentLength) {
             dnaConverted.push(dnaFragment);
             dnaFragment = "";
         }

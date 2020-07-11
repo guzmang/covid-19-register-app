@@ -1,33 +1,42 @@
-const { mockPerson } = require('../mocks');
-const express = require('express');
+require('../../config/config');
 
-const app = express();
+const expect = require('chai').expect;
+const request = require('supertest');
+const path = require('path');
+const nock = require('nock');
+
+console.log("path");
+console.log(__dirname);
+console.log(path.resolve(__dirname, '../../'));
+
+const app = require('../../routes');
+const conn = require('../../database');
+
+const { mockHealthy, mockInfected, mockImmune } = require('../mocks');
 
 describe('UNIT TESTING - COVID-19', () => {
-    beforeEach(() => {
+    before((done) => {
+        conn.connect()
+            .then(() => done())
+            .catch((err) => done(err));
+    })
 
-    });
+    after((done) => {
+        conn.close()
+            .then(() => done())
+            .catch((err) => done(err));
+    })
 
-    afterEach(() => {
-
-    });
-
-    it("should return status 200 and list all persons", async() => {
-        // GIVEN
-
-        // WHEN
-
-        // THEN
-
-    });
-
-    it("should returns status 400 (...)", async() => {
-        // GIVEN
-
-        // WHEN
-
-        // THEN
-
+    it('OK, getting peoples has no peoples', (done) => {
+        request(app).get('/covid/checks')
+            .then((res) => {
+                //                const body = res.body;
+                //                expect(body.length).to.equal(0);
+                console.log("AAAA");
+                console.log(res.body);
+                done();
+            })
+            .catch((err) => done(err));
     });
 
 });
