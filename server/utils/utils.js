@@ -9,7 +9,10 @@ function dnaIsWholeNumberAfterSqrt(dna) {
 
 function dnaBases(dna) {
     let regExp = /[ACGT]/g;
-    return (dna.match(regExp).length === dna.length);
+    let search = dna.match(regExp);
+    console.log(search);
+    console.log(dna.length);
+    return (search ? (dna.match(regExp).length === dna.length) : false);
 }
 
 // ============================
@@ -19,12 +22,12 @@ function dnaBases(dna) {
 function dnaConverter(dna) {
     let fragmentLength = Math.sqrt(dna.length);
     let dnaConverted = new Array();
-    let dnaFragment = "";
+    let dnaFragment = '';
     for (let i = 0; i < dna.length; i++) {
         dnaFragment = dnaFragment + dna[i];
         if (dnaFragment.length === fragmentLength) {
             dnaConverted.push(dnaFragment);
-            dnaFragment = "";
+            dnaFragment = '';
         }
     };
     return dnaConverted;
@@ -35,7 +38,7 @@ function dnaConverter(dna) {
 // ============================
 
 function searchSequenceInRow(row) {
-    let sequences = ["AAAA", "CCCC", "GGGG", "TTTT"]
+    let sequences = ['AAAA', 'CCCC', 'GGGG', 'TTTT']
 
     let sequenceCounter = sequences.map((sequence) => row.includes(sequence))
         .filter((isMatch) => isMatch)
@@ -56,17 +59,17 @@ function getTransposedMatrix(dna) {
 
 function analyzeMatches(matches) {
     if (matches < 2) {
-        return "healthy";
+        return 'healthy';
     } else if (matches >= 2 && matches < 4) {
-        return "infected";
+        return 'infected';
     } else {
-        return "immune";
+        return 'immune';
     }
 }
 
 function getDiagnostic(dna) {
     let dnaFormated;
-    if ((typeof dna === "string")) {
+    if ((typeof dna === 'string')) {
         dnaFormated = dnaConverter(dna);
     } else {
         dnaFormated = dna;
@@ -82,9 +85,9 @@ function getDiagnostic(dna) {
 
 function countByStatus(persons) {
     return {
-        healthy: persons.filter((person) => person.result === "healthy").length,
-        infected: persons.filter((person) => person.result === "infected").length,
-        immune: persons.filter((person) => person.result === "immune").length
+        healthy: persons.filter((person) => person.result === 'healthy').length,
+        infected: persons.filter((person) => person.result === 'infected').length,
+        immune: persons.filter((person) => person.result === 'immune').length
     }
 };
 

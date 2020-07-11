@@ -115,7 +115,7 @@ app.get('/covid/checks/:id', (req, res) => {
             return res.status(404).json({
                 ok: false,
                 err: {
-                    message: "Person not found."
+                    message: 'Person not found.'
                 }
             });
         }

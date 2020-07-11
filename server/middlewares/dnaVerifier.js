@@ -5,16 +5,27 @@ const { dnaIsWholeNumberAfterSqrt, dnaBases, dnaConverter, getDiagnostic } = req
 // ===========================
 
 let dnaValidator = (req, res, next) => {
-
     let dna = req.body.dna;
 
     if ((typeof dna === 'string')) {
         dna = req.body.dna.toUpperCase();
+        dna = dna.replace(/\n/g, '')
+        dna = dna.replace(/\t/g, '')
+        dna = dna.replace(/ /g, '')
     } else {
         return res.status(400).json({
             ok: false,
             err: {
                 message: 'DNA must be String type.'
+            }
+        });
+    }
+
+    if (dna === '' || dna === undefined || dna === null) {
+        return res.status(400).json({
+            ok: false,
+            err: {
+                message: 'Please insert a DNA value.'
             }
         });
     }

@@ -24,7 +24,7 @@ let mockInfected = {
         "CCCCTA",
         "TCACTG"
     ],
-    "name": "Gerardo",
+    "name": "Eduardo",
     "country": "Venezuela",
     "result": "infected",
     "__v": 0
@@ -40,27 +40,52 @@ let mockImmune = {
         "CCCCTT",
         "TCACTT"
     ],
-    "name": "Gerardo",
-    "country": "Paraguay",
+    "name": "Alvaro",
+    "country": "Argentina",
     "result": "immune",
     "__v": 0
 };
 
-/*
-let a = ["ATGCGA", "CGGTAC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"];
-	"dna": "ATGCGACGGTACTTATGTAGAAGGCCCCTATCACTG"
-let b = ["ATGCGA", "CGGTGC", "TTATGT", "AGAAGG", "CCCCTA", "TCACTG"];
-	"dna": "ATGCGACGGTGCTTATGTAGAAGGCCCCTATCACTG"
-let c = ["AAAAGA", "CGGTGC", "TTATGT", "AGAAGT", "CCCCTT", "TCACTT"];
+let getChecks = {
+    "ok": true,
+    "persons": [
+        mockHealthy,
+        mockInfected,
+        mockImmune
+    ]
+};
+
+let dnaNoString = {
+    "name": "Antonella",
+    "country": "Uruguay",
+    "dna": 9
+};
+
+let postHealthy = {
+    "name": "Antonella",
+    "country": "Uruguay",
+    "dna": "ATGCGACGGTACTTATGTAGAAGGCCCCTATCACTG"
+};
+
+let postInfected = {
+    "name": "Angeles",
+    "country": "Peru",
+    "dna": "ATGCGACGGTGCTTATGTAGAAGGCCCCTATCACTG"
+};
+
+let postImmune = {
+    "name": "Elizabeth",
+    "country": "Chile",
     "dna": "AAAAGACGGTGCTTATGTAGAAGTCCCCTTTCACTT"
-    
-console.log(getDiagnostic(a));
-console.log(getDiagnostic(b));
-console.log(getDiagnostic(c));
- */
+};
 
 module.exports = {
     mockHealthy,
     mockInfected,
-    mockImmune
+    mockImmune,
+    getChecks,
+    dnaNoString,
+    postHealthy,
+    postInfected,
+    postImmune
 };
