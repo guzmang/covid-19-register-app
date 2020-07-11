@@ -5,10 +5,6 @@ const request = require('supertest');
 const path = require('path');
 const nock = require('nock');
 
-console.log("path");
-console.log(__dirname);
-console.log(path.resolve(__dirname, '../../'));
-
 const app = require('../../routes');
 const conn = require('../../database');
 
@@ -32,7 +28,6 @@ describe('UNIT TESTING - COVID-19', () => {
             .then((res) => {
                 //                const body = res.body;
                 //                expect(body.length).to.equal(0);
-                console.log("AAAA");
                 console.log(res.body);
                 done();
             })
