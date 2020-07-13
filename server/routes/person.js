@@ -7,9 +7,9 @@ const { countByStatus } = require('../utils/utils');
 
 const app = express();
 
-app.get('/covid/checks', (req, res) => {
+app.get('/covid/checks', async(req, res) => {
 
-    Person.find()
+    await Person.find()
         .exec((err, persons) => {
 
             if (err) {
@@ -28,7 +28,7 @@ app.get('/covid/checks', (req, res) => {
 
 });
 
-app.post('/covid/checks', dnaValidator, (req, res) => {
+app.post('/covid/checks', dnaValidator, async(req, res) => {
 
     let body = req.body;
 
@@ -39,7 +39,7 @@ app.post('/covid/checks', dnaValidator, (req, res) => {
         result: req.result
     });
 
-    person.save((err, personDB) => {
+    await person.save((err, personDB) => {
 
         if (err) {
             return res.status(400).json({
@@ -57,9 +57,9 @@ app.post('/covid/checks', dnaValidator, (req, res) => {
 
 });
 
-app.get('/covid/stats', (req, res) => {
+app.get('/covid/stats', async(req, res) => {
 
-    Person.find()
+    await Person.find()
         .exec((err, persons) => {
 
             if (err) {
@@ -82,9 +82,9 @@ app.get('/covid/stats', (req, res) => {
 
 });
 
-app.get('/covid/checks/search', queryValidator, (req, res) => {
+app.get('/covid/checks/search', queryValidator, async(req, res) => {
 
-    Person.find(req.dbObjectParameter)
+    await Person.find(req.dbObjectParameter)
         .exec((err, persons) => {
 
             if (err) {
@@ -105,11 +105,11 @@ app.get('/covid/checks/search', queryValidator, (req, res) => {
 
 });
 
-app.get('/covid/checks/:id', (req, res) => {
+app.get('/covid/checks/:id', async(req, res) => {
 
     let id = req.params.id;
 
-    Person.findById(id, (err, person) => {
+    await Person.findById(id, (err, person) => {
 
         if (err) {
             return res.status(404).json({
