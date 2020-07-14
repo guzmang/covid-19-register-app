@@ -10,8 +10,6 @@ function dnaIsWholeNumberAfterSqrt(dna) {
 function dnaBases(dna) {
     let regExp = /[ACGT]/g;
     let search = dna.match(regExp);
-    console.log(search);
-    console.log(dna.length);
     return (search ? (dna.match(regExp).length === dna.length) : false);
 }
 

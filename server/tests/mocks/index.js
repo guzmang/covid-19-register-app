@@ -55,6 +55,13 @@ let getChecks = {
     ]
 };
 
+let getStats = {
+    "ok": true,
+    "healthy": 6,
+    "infected": 1,
+    "immune": 2
+}
+
 let dnaNoString = {
     "name": "Antonella",
     "country": "Uruguay",
@@ -84,6 +91,7 @@ module.exports = {
     mockInfected,
     mockImmune,
     getChecks,
+    getStats,
     dnaNoString,
     postHealthy,
     postInfected,

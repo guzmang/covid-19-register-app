@@ -9,22 +9,26 @@ const app = express();
 
 app.get('/covid/checks', async(req, res) => {
 
-    await Person.find()
-        .exec((err, persons) => {
+    try {
+        await Person.find()
+            .exec((err, persons) => {
 
-            if (err) {
-                return res.status(400).json({
-                    ok: false,
-                    err
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    });
+                }
+
+                res.json({
+                    ok: true,
+                    persons
                 });
-            }
 
-            res.json({
-                ok: true,
-                persons
             });
-
-        });
+    } catch (e) {
+        console.error(e);
+    }
 
 });
 
@@ -39,69 +43,84 @@ app.post('/covid/checks', dnaValidator, async(req, res) => {
         result: req.result
     });
 
-    await person.save((err, personDB) => {
+    try {
+        await person.save((err, personDB) => {
 
-        if (err) {
-            return res.status(400).json({
-                ok: false,
-                err
+            if (err) {
+                return res.status(400).json({
+                    ok: false,
+                    err
+                });
+            }
+
+            res.json({
+                ok: true,
+                person: personDB
             });
-        }
 
-        res.json({
-            ok: true,
-            person: personDB
         });
+    } catch (e) {
+        console.error(e);
+    }
 
-    });
 
 });
 
 app.get('/covid/stats', async(req, res) => {
 
-    await Person.find()
-        .exec((err, persons) => {
+    try {
+        await Person.find()
+            .exec((err, persons) => {
 
-            if (err) {
-                return res.status(400).json({
-                    ok: false,
-                    err
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    });
+                }
+
+                let counting = countByStatus(persons);
+
+                res.json({
+                    ok: true,
+                    healthy: counting.healthy,
+                    infected: counting.infected,
+                    immune: counting.immune
                 });
-            }
 
-            let counting = countByStatus(persons);
-
-            res.json({
-                ok: true,
-                healthy: counting.healthy,
-                infected: counting.infected,
-                immune: counting.immune
             });
+    } catch (e) {
+        console.error(e);
+    }
 
-        });
 
 });
 
 app.get('/covid/checks/search', queryValidator, async(req, res) => {
 
-    await Person.find(req.dbObjectParameter)
-        .exec((err, persons) => {
+    try {
+        await Person.find(req.dbObjectParameter)
+            .exec((err, persons) => {
 
-            if (err) {
-                return res.status(400).json({
-                    ok: false,
-                    err
+                if (err) {
+                    return res.status(400).json({
+                        ok: false,
+                        err
+                    });
+                }
+
+                res.json({
+                    ok: true,
+                    country: req.dbObjectParameter.country,
+                    result: req.dbObjectParameter.result,
+                    persons
                 });
-            }
 
-            res.json({
-                ok: true,
-                country: req.dbObjectParameter.country,
-                result: req.dbObjectParameter.result,
-                persons
             });
+    } catch (e) {
+        console.error(e);
+    }
 
-        });
 
 });
 
@@ -109,23 +128,27 @@ app.get('/covid/checks/:id', async(req, res) => {
 
     let id = req.params.id;
 
-    await Person.findById(id, (err, person) => {
+    try {
+        await Person.findById(id, (err, person) => {
 
-        if (err) {
-            return res.status(404).json({
-                ok: false,
-                err: {
-                    message: 'Person not found.'
-                }
+            if (err) {
+                return res.status(404).json({
+                    ok: false,
+                    err: {
+                        message: 'Person not found.'
+                    }
+                });
+            }
+
+            res.json({
+                ok: true,
+                person
             });
-        }
 
-        res.json({
-            ok: true,
-            person
         });
-
-    });
+    } catch (e) {
+        console.error(e);
+    }
 
 });
 
