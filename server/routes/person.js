@@ -1,4 +1,5 @@
 const express = require('express');
+const cors = require('cors');
 
 const Person = require('../models/person');
 const { dnaValidator } = require('../middlewares/dnaVerifier');
@@ -7,7 +8,22 @@ const { countByStatus } = require('../utils/utils');
 
 const app = express();
 
-app.get('/covid/checks', async(req, res) => {
+const whiteList = [
+    'http://localhost:4200/',
+    'https://covid-19-register-app.herokuapp.com/'
+];
+
+const corsOptions = {
+    origin: function(origin, callback) {
+        if (whiteList.indexOf(origin) !== 1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    }
+}
+
+app.get('/covid/checks', cors(corsOptions), async(req, res) => {
 
     try {
         await Person.find()
@@ -32,7 +48,7 @@ app.get('/covid/checks', async(req, res) => {
 
 });
 
-app.post('/covid/checks', dnaValidator, async(req, res) => {
+app.post('/covid/checks', [cors(corsOptions), dnaValidator], async(req, res) => {
 
     let body = req.body;
 
@@ -66,7 +82,7 @@ app.post('/covid/checks', dnaValidator, async(req, res) => {
 
 });
 
-app.get('/covid/stats', async(req, res) => {
+app.get('/covid/stats', cors(corsOptions), async(req, res) => {
 
     try {
         await Person.find()
@@ -96,7 +112,7 @@ app.get('/covid/stats', async(req, res) => {
 
 });
 
-app.get('/covid/checks/search', queryValidator, async(req, res) => {
+app.get('/covid/checks/search', [cors(corsOptions), queryValidator], async(req, res) => {
 
     try {
         await Person.find(req.dbObjectParameter)
@@ -124,7 +140,7 @@ app.get('/covid/checks/search', queryValidator, async(req, res) => {
 
 });
 
-app.get('/covid/checks/:id', async(req, res) => {
+app.get('/covid/checks/:id', cors(corsOptions), async(req, res) => {
 
     let id = req.params.id;
 
