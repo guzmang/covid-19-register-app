@@ -7,6 +7,15 @@ const { dnaIsWholeNumberAfterSqrt, dnaBases, dnaConverter, getDiagnostic } = req
 let dnaValidator = (req, res, next) => {
     let dna = req.body.dna;
 
+    if (dna === '' || dna === undefined || dna === null) {
+        return res.status(400).json({
+            ok: false,
+            err: {
+                message: 'Please insert a DNA value.'
+            }
+        });
+    }
+
     if ((typeof dna === 'string')) {
         dna = req.body.dna.toUpperCase();
         dna = dna.replace(/\n/g, '')
@@ -21,11 +30,11 @@ let dnaValidator = (req, res, next) => {
         });
     }
 
-    if (dna === '' || dna === undefined || dna === null) {
+    if (people.dna.length < 36) {
         return res.status(400).json({
             ok: false,
             err: {
-                message: 'Please insert a DNA value.'
+                message: 'DNA must have a minimum length value = 36 and follow a NxN sequence (with a minimum value of N = 6).'
             }
         });
     }
