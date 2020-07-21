@@ -30,7 +30,7 @@ let dnaValidator = (req, res, next) => {
         });
     }
 
-    if (people.dna.length < 36) {
+    if (dna.length < 36) {
         return res.status(400).json({
             ok: false,
             err: {
