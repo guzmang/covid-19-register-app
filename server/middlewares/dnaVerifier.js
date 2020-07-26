@@ -63,6 +63,4 @@ let dnaValidator = (req, res, next) => {
 
 }
 
-module.exports = {
-    dnaValidator
-};
+module.exports = dnaValidator;

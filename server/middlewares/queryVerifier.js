@@ -46,6 +46,4 @@ let queryValidator = (req, res, next) => {
 
 }
 
-module.exports = {
-    queryValidator
-};
+module.exports = queryValidator;

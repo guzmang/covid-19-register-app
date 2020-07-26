@@ -2,9 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const PersonService = require('../services/person-service');
-const { dnaValidator } = require('../middlewares/dnaVerifier');
-const { queryValidator } = require('../middlewares/queryVerifier');
-
+const { dnaValidator, queryValidator } = require('../middlewares');
 const app = express();
 const personService = new PersonService();
 
