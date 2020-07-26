@@ -1,0 +1,17 @@
+{
+    "preset": "@shelf/jest-mongodb",
+    "collectCoverage": true,
+    "coverageThreshold": {
+        "global": {
+            "branches": 80,
+            "functions": 80,
+            "lines": 80
+        }
+    },
+    "coverageReporters": ["lcov"],
+    "coverageDirectory": "./output/code-coverage",
+    "testTimeout": 5000,
+    "globals": {
+        "globalVar": "Hello World!!!"
+    }
+}
