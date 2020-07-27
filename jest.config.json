@@ -1,5 +1,6 @@
 {
     "preset": "@shelf/jest-mongodb",
+    "testEnvironment": "node",
     "collectCoverage": true,
     "coverageThreshold": {
         "global": {

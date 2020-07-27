@@ -68,6 +68,25 @@ let dnaNoString = {
     "dna": 9
 };
 
+let postOkResponse = {
+    "ok": true,
+    "person": {
+        "dna": [
+            "ATGCGA",
+            "CGGTAC",
+            "TTATGT",
+            "AGAAGG",
+            "CCCCTA",
+            "TCACTG"
+        ],
+        "_id": "5f1e6d293d08a85da4751678",
+        "name": "Antonella",
+        "country": "Uruguay",
+        "result": "healthy",
+        "__v": 0
+    }
+}
+
 let postHealthy = {
     "name": "Antonella",
     "country": "Uruguay",
@@ -93,6 +112,7 @@ module.exports = {
     getChecks,
     getStats,
     dnaNoString,
+    postOkResponse,
     postHealthy,
     postInfected,
     postImmune

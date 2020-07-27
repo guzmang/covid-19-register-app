@@ -75,9 +75,11 @@ The dna property have some validations. It must be a:
 - NxN sequence (N min value: 2), it means a string with length NxN.
 - String that only contains A, T, C and G as values.
 
-## To upgrade
+## User interface
 
-An user interface is needed, that is the next step to develop.
+Download it on github:
+
+https://github.com/guzmang/covid-19-register-app-ui
 
 ## To end
 
@@ -93,4 +95,8 @@ Run in the directory project the command:
 npm test
 ```
 
-To see the tests and the coverage.
+## POSTMAN
+
+This is an online document that may help you to test the existing different endpoints.
+
+https://documenter.getpostman.com/view/9195768/T1DqgcHL?version=latest
