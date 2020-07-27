@@ -1,13 +1,8 @@
 require('../../config/config');
 
-const { MongoClient } = require('mongodb');
 const expect = require('chai').expect;
-const request = require('supertest');
-const req = require('request');
-const nock = require('nock');
 
 const app = require('../../routes');
-const conn = require('../../database');
 const PersonService = require('../../services/person-service');
 
 const {
@@ -20,13 +15,6 @@ const {
 const queryValidator = require('../../middlewares/queryVerifier');
 const dnaValidator = require('../../middlewares/dnaVerifier');
 const mocks = require('../mocks');
-
-const url = nock(process.env.URL);
-
-process.env.URL = 'http://localhost:3000/';
-const api = req.defaults({
-    baseUrl: process.env.URL
-});
 
 describe('UNIT TESTING - testing utils', () => {
 
@@ -325,38 +313,6 @@ describe('UNIT TESTING - testing services', () => {
 //            console.log(e);
             done();
         }
-    });
-});
-
-describe('UNIT TESTING - getting people', () => {
-
-    let connection;
-    let db;
-  
-    beforeAll(async () => {
-      connection = await MongoClient.connect("mongodb://localhost:27017", {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-      });
-      db = await connection.db("covid");
-    });
-  
-    afterAll(async () => {
-      await connection.close();
-      await db.close();
-    });
-
-    test('OK, getting peoples has no peoples', (done) => {
-
-        url.get('/covid/checks')
-            .reply(200, {});
-
-        api.get('/covid/checks', (err, res, body) => {
-//            console.log(JSON.parse(body));
-//            expect(JSON.parse(body)).to.deep.equals({});
-            done();
-        });
-
     });
 
 });
