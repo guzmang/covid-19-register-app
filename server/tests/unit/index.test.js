@@ -87,7 +87,7 @@ describe('UNIT TESTING - testing middlewares', () => {
 
     let res;
   
-    beforeAll(async () => {
+    beforeAll(() => {
         res = {
             send: function(){ },
             json: function(err){
@@ -223,7 +223,7 @@ describe('UNIT TESTING - testing services', () => {
 
     let personService;
   
-    beforeAll(async () => {
+    beforeAll(() => {
         personService = new PersonService();
     });
 
